@@ -4,7 +4,9 @@ author: Sejal Keshvara
 output: html_document
 github_document: default
 
+I used the Palmer penguins dataset to find the means of the bill length,
 
+length <- c(39.1, 39.5, 40.3, 36.7, 39.3, 38.9, 39.2, 34.1, 42)
 
----
+mean(length)
 
