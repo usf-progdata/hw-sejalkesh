@@ -17,3 +17,9 @@ mean(depth)
 sd(depth)
 
 mean(depth, trim = 0.1)
+
+flipper <- c(181, 186, 195, 193, 190, 181, 195, 193, 190)
+
+range(flipper)
+
+flipper < 190
