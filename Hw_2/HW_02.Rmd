@@ -27,5 +27,11 @@ gapminder %>% filter(year %in% (1970:1979), country %in% c("Canada", "Brazil", "
 
 ```{r}
 
+gapminder  %>% 
+  filter(year %in% (1970:1979), country %in% c("Canada", "Brazil", "Germany"))  %>% 
+  select(country, gdpPercap)
+```
+# Exercise 1.3
+```{r}
 
 
