@@ -77,7 +77,5 @@ palmerpenguins::penguins %>%
   geom_jitter(aes(color = species), alpha = 0.5, show.legend = FALSE)
   labs(x = "Species",
        y = "Flipper length (mm)")
-
-
  
 ```
