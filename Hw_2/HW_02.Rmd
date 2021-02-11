@@ -48,12 +48,15 @@ gapminder  %>%
 ```
 # Exercise 1.5 Scatterplot
 ```{r}
-gapminder %>% 
-  filter(country=="Canada")
+library(gapminder)
 library(ggplot2)
-ggplot(aes(x= lifeExp, y= gdpPercap)) + 
-  geom 
-
+gapminder %>% 
+  filter(country=="Canada")  %>% 
+ggplot(gapminder, df, mapping = aes(gdpPercap, lifeExp)) +
+  geom_jitter(alpha = 2) +
+  scale_x_log10("GDP per capita", labels = scales::dollar_format()) +
+  theme_bw() +
+  ylab("Life Expectancy")
 
 ```
 
@@ -67,8 +70,9 @@ summarize(mu = mean(body_mass_g), sigma = sd(body_mass_g))
 ```
 # Exercise 2.2
 ```{r}
-
-
+library(palmerpenguins)
+palmerpenguins::penguins
+summarise()
 
 
 ```
