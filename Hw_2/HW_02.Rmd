@@ -71,8 +71,13 @@ summarize(mu = mean(body_mass_g), sigma = sd(body_mass_g))
 # Exercise 2.2
 ```{r}
 library(palmerpenguins)
-palmerpenguins::penguins
-summarise()
+library(ggplot2)
+palmerpenguins::penguins %>%
+ ggplot(data = penguins, df, mapping = aes(x = species, y = flipper_length_mm)) +
+  geom_jitter(aes(color = species), alpha = 0.5, show.legend = FALSE)
+  labs(x = "Species",
+       y = "Flipper length (mm)")
 
 
+ 
 ```
