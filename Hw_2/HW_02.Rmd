@@ -41,4 +41,13 @@ gapminder  %>%
 
 # Exercise 1.4 
 ```{r}
+gapminder  %>% 
+  filter(country, gdpPercap) %>% 
+  max(country$gdpPercap)
+   
+  
+
+```
+# Exercise 1.5 
+```{r}
 
