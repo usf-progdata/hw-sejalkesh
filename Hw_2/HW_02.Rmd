@@ -46,6 +46,29 @@ gapminder  %>%
   filter(gdpPercap == max(gdpPercap))
 
 ```
-# Exercise 1.5 
+# Exercise 1.5 Scatterplot
+```{r}
+gapminder %>% 
+  filter(country=="Canada")
+library(ggplot2)
+ggplot(aes(x= lifeExp, y= gdpPercap)) + 
+  geom 
+
+
+```
+
+# Exercise 2.1
+```{r}
+library(palmerpenguins)
+palmerpenguins::penguins  %>% 
+group_by( body_mass_g)  %>% 
+summarize(mu = mean(body_mass_g), sigma = sd(body_mass_g))
+
+```
+# Exercise 2.2
 ```{r}
 
+
+
+
+```
