@@ -23,16 +23,17 @@ summary(green_data)
 
 ```{r}
 green_data %>%
-mutate(
-  across(everything()), 
-         ~recode(.x, "-99" = NA, .default = .x )
-)
+  mutate(
+    across(everything(), ~ recode(.x, "-99" = NA, .default = .x )),
+  )  
 
-green1= recode(green1, "-99" = NA, .default = "green1" )
+green1= recode(green1, "-99" = NA, .default = green1)
 
 
 ```
 # There does not seem to be anything unusual with the item responses. 
+
+
   2. Compute total scores for the four scales. 
      Recode variables as needed.
   3. Rescale the variables so that they go from 0-100 instead of the original range.
