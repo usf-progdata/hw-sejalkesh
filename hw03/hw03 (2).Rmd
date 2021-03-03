@@ -31,19 +31,27 @@ summary(green_data)
 ```
 
 ```{r}
-green_data %>%
+#green_data <- na_if(green_data, "-99")
+
+green_data_missingvalues <- green_data %>% 
   mutate(
-    across(everything(), ~ recode(.x, "-99" = NA, .default = .x )),
-  )  
-
-green1= recode(green1, "-99" = NA, .default = green1)
-
+    across(.cols = everything(),
+           ~na_if(.x, "-99")
+           )
+  )
 
 ```
-# There does not seem to be anything unusual with the item responses. 
+# There is an unusal set of values in the data set. That is why the value -99 was recoded. 
 
 
   2. Compute total scores for the four scales. 
+  
+```{r}
+
+
+
+
+```
      Recode variables as needed.
   3. Rescale the variables so that they go from 0-100 instead of the original range.
      Name the recaled variables `*_pomp`.
