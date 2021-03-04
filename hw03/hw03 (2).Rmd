@@ -100,9 +100,23 @@ select(id, student, Green_pomp, Comp_pomp, Intel_pomp, Open_pomp)
   4. Make plots that illustrate the distributions of the 4 POMP-scored variables.
   
 ```{r}
+#Histograms 
 
+#Histogram for Green_pomp
+ggplot(green_rescaled, aes(x = Green_pomp)) +
+  geom_histogram(binwidth = 2)
 
+#Histogram for Comp_pomp
+ggplot(green_rescaled, aes(x = Comp_pomp)) +
+  geom_histogram(binwidth = 2)
 
+#Histogram for Intel_pomp
+ggplot(green_rescaled, aes(x = Intel_pomp)) +
+  geom_histogram(binwidth = 2)
+
+#Histogram for Open_pomp
+ggplot(green_rescaled, aes(x = Open_pomp)) +
+  geom_histogram(binwidth = 1.5)
 
 
 ```
