@@ -19,6 +19,10 @@ green_data <- readr::read_csv(here::here("hw03", "green_data (1).csv"))
 ```{r}
 library(dplyr)
 library(ggplot2)
+library(tidyr)
+library(tibble)
+library(tidyverse)
+library(scales)
 ```
 
 For your assignment, do the following.
@@ -84,10 +88,14 @@ select(id, student, Green_total, Comp_total, Intel_total, Open_total)
      Name the recaled variables `*_pomp`.
      
 ```{r}
-
-
-
-
+green_rescaled <- green_total_values %>%
+  mutate(
+    Green_pomp = rescale(Green_total, to = c(0,100), from = c(1,5)), 
+    Comp_pomp = rescale(Comp_total, to = c(0,100), from = c(1,5)), 
+    Intel_pomp = rescale(Intel_total, to = c(0,100), from = c(1,5)),
+    Open_pomp = rescale(Open_total, to = c(0,100), from = c(1,5)),
+    ) %>% 
+select(id, student, Green_pomp, Comp_pomp, Intel_pomp, Open_pomp)
 ```
   4. Make plots that illustrate the distributions of the 4 POMP-scored variables.
   
