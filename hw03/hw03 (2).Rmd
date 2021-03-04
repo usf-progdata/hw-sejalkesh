@@ -138,16 +138,13 @@ green_rescaled %>%
       geom_jitter()
         geom_smooth(method = lm)
 
-# This plot shows that 
+
         
 green_rescaled %>% 
   ggplot() +
     aes(x = Green_pomp, y = Open_pomp, group = student, color = student, fill = student) +
       geom_jitter() +
         geom_smooth(method = lm)
-
-#This plot shows that 
-
 
 ```
   6. Compare **green reputation** for students and non-students using a **rainfall plot** (bar + density + data points).
@@ -163,10 +160,19 @@ green_rescaled %>%
 ```
   7. Compute a summary table of means, SDs, medians, minima, and maxima for the four total scores for students and non-students.
 ```{r}
-
-
-
-
+green_rescaled %>%
+  select(id, student, Green_pomp, Comp_pomp, Intel_pomp, Open_pomp) %>% 
+    group_by(student) %>% 
+      summarise(across(c(Green_pomp, Comp_pomp, Intel_pomp, Open_pomp)),  
+          list(
+            Mean = ~mean(.x, na.rm = TRUE),
+            Sd = ~sd(.x, na.rm = TRUE),
+            Median = ~median(.x, na.rm = TRUE),
+            Min = ~min(.x, na.rm = TRUE),
+            Max = ~max(.x, na.rm = TRUE)
+          )
+      )
+  
 
 ```
 In your assignment, prepare an RMarkdown file that includes both the coding and (for 4-7) narrative descriptions of your results.
