@@ -125,10 +125,28 @@ ggplot(green_rescaled, aes(x = Open_pomp)) +
      What do these plots show?
      
 ```{r}
+green_rescaled %>% 
+ggplot() +
+  aes(x = Green_pomp, y = Comp_pomp, group = student, color = student, fill = student) +
+    geom_jitter()
+      geom_smooth(method = lm)
+# This plot shows that Openness positively correlates with Green reputation in both students and non students. 
 
+green_rescaled %>% 
+  ggplot() +
+    aes(x = Green_pomp, y = Intel_pomp, group = student, color = student, fill = student) +
+      geom_jitter()
+        geom_smooth(method = lm)
 
+# This plot shows that 
+        
+green_rescaled %>% 
+  ggplot() +
+    aes(x = Green_pomp, y = Open_pomp, group = student, color = student, fill = student) +
+      geom_jitter() +
+        geom_smooth(method = lm)
 
-
+#This plot shows that 
 
 
 ```
