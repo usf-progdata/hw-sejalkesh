@@ -1,0 +1,92 @@
+---
+title: "HW_02"
+author: "Sejal Keshvara"
+date: "2/5/2020"
+output: 
+  github_document: default
+  html_document: default
+---
+
+<!-- BMW: Please knit your document twice. Once to html and once to github_document. -->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("gapminder") # BMW: Put your library() calls in the setup chunk.
+library("dplyr")
+library(ggplot2) # BMW: Put all library() calls at teh top of your script. You only need to library() a pacakge once.
+library(palmerpenguins)
+```
+
+# Exercise 1 Basic dplyr
+
+# Exercise 1.1 Filter
+
+```{r filter dataset}
+gapminder %>% # BMW: For readability, always start a new line after %>% 
+  filter(year %in% (1970:1979), country %in% c("Canada", "Brazil", "Germany"))
+```
+
+# Exercise 1.2
+
+```{r}
+gapminder  %>% 
+  filter(year %in% (1970:1979), country %in% c("Canada", "Brazil", "Germany"))  %>% 
+  select(country, gdpPercap)
+```
+
+# Exercise 1.3
+
+<!-- BMW: In markdown, you need a blank line after a paragraph. A single line break is ignored. -->
+
+```{r}
+gapminder  %>% # BMW: This question did not ask you to select or filter on teh conditions from 1.1/1.2
+  # lag(lifedrop = diff(lifeExpectancy)) # BMW: This didn't do what you wanted it too. Did you look at the output and see if it was correct?
+  group_by(country) %>% 
+  mutate(changeLifeExp = lifeExp - lag(lifeExp)) %>% 
+  filter(changeLifeExp < 0)
+```
+
+# Exercise 1.4 
+
+```{r}
+gapminder %>%
+  group_by(country) %>%
+  filter(gdpPercap == max(gdpPercap))
+```
+
+<!-- BMW: Great job! -->
+
+# Exercise 1.5 Scatterplot
+
+```{r}
+gapminder %>%
+  filter(country == "Canada")  %>%
+  ggplot(mapping = aes(gdpPercap, lifeExp)) +
+  geom_point(alpha = .2) + # BMW: alpha needs to be between 0 and 1
+  # BMW: you want geom_point(). geom_jitter() adds noise to the values (useful to reduce overplotting) but you don't want that here.
+  scale_x_log10("GDP per capita", labels = scales::dollar_format()) +
+  theme_bw() +
+  ylab("Life Expectancy")
+```
+
+# Exercise 2.1
+
+```{r}
+palmerpenguins::penguins  %>%  # BMW: Don't group_by() on a continuous variable or it will make a separate group for each unique value
+  summarize(mu = mean(body_mass_g, na.rm = TRUE), # BMW: Did this table come out like you wanted it to? It came out with 95 rows (one for each value of bodymass). Be sure that you check your code to be sure it produces the output you expect.
+            sigma = sd(body_mass_g, na.rm = TRUE)) # BMW: Where is your second variable?  
+# BMW: Where is your plot?
+```
+
+# Exercise 2.2
+
+```{r}
+# BMW: Where is your summary table? 
+
+palmerpenguins::penguins %>% # BMW: When you use the pipe, you need to omit the first argument from the next function. That is what the pipe inserts.
+ ggplot(mapping = aes(x = species, y = flipper_length_mm)) + # BMW: What was that df thing?
+  geom_jitter(aes(color = species), alpha = 0.5, height = 0, show.legend = FALSE) + # BMW: You were missing a + at the end of this line
+  # BMW: When you use geom_jitter with one continuous and one categorical variable, you want to avoid adding noise on the axis with the continous variable. You do that here by specifying height = 0 
+  labs(x = "Species",
+       y = "Flipper length (mm)")
+```
