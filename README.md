@@ -1,4 +1,8 @@
-# Homework Template
+<!-- Great work. Just a few comemnts below. -->
+
+<!-- After you merge a branch back into master, delete the branch to keep your repo tidy. -->
+
+# Homework Repository
 
 This repository is for posting homework assignments and for commenting on my code. 
 
@@ -11,3 +15,5 @@ I **love** *Star Wars*!
 - Flamin Hot Cheetos
 - Boba Tea
 - Green Chickpeas
+
+<!-- For best practices, always end your script files with a blank line. -->

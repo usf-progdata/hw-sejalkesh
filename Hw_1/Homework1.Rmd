@@ -1,0 +1,41 @@
+<!-- There are a few issues here. See below -->
+
+<!-- First, your YAML metadata block at the top of the file (where title, author, output, etc. are, needs to begin _and end_ with three hyphens like below. -->
+<!-- Second, see how suboptions on the YAML (like the different types of 'output' need to be indented by two spaces. -->
+<!-- See also the comments below. -->
+
+---
+title: "Exploring Palmer Penguins Dataset"
+author: Sejal Keshvara
+output: 
+  html_document: default
+  github_document: default
+---
+
+<!-- Please place all files for a homework assignment into a folder for that assignment, like 'hw01', 'hw02', etc. -->
+
+I used the Palmer penguins dataset to find the means of the bill length,
+
+<!-- R code needs to be entered into code blocks. Right now, this is being treated as regular text. See how I edited it below.  -->
+
+```{r}
+length <- c(39.1, 39.5, 40.3, 36.7, 39.3, 38.9, 39.2, 34.1, 42)
+
+mean(length)
+
+depth <- c(18.7, 17.4, 18, 19.3, 20.6, 17.8, 19.6, 18.1, 20.2)
+
+mean(depth)
+
+sd(depth)
+
+mean(depth, trim = 0.1)
+
+flipper <- c(181, 186, 195, 193, 190, 181, 195, 193, 190)
+
+range(flipper)
+
+flipper < 190
+```
+
+<!-- When you knit the file, you want to look at the output and see that it looks correct. In your knitted html and md, it just shows the R code, but not any results, because the R code wasn't in a code block and so wasn't actually run. -->
