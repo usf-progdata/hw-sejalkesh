@@ -1,0 +1,29 @@
+---
+title: "hw04"
+author: "Sejal Keshvara"
+date: "3/10/2021"
+output: 
+  html_document: default
+  github_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(readr)
+
+
+```
+
+```{r}
+url <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/bob-ross/elements-by-episode.csv"
+```
+
+```{r}
+ross_data <- read_csv(url)
+
+
+```
