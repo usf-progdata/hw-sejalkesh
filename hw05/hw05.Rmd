@@ -79,16 +79,23 @@ Plot_scent <- Scented %>%
     scale_x_date(name = "Date", date_breaks = "6 months", date_labels = "%m-%Y") +
     scale_y_continuous(name = "Mean Ratings")
   
-  
+  print(Plot_scent)
 
 ```
 
 ```{r}
-Plot_unscented <- Scented %>% 
+Plot_unscented <- Unscented %>% 
   filter(Date > "2017-01-01") %>% 
-  
+  mutate(Mean_rating = mean(Rating, na.rm = TRUE)) %>% 
+  ggplot() + 
+    aes(x = as.Date(Date), y = Mean_rating) +
+    geom_point(size = 0.5, shape = 1, alpha = 0.03) +
+    geom_vline(xintercept = as.numeric(as.Date("2020-01-20")), linetype = "dashed") +
+    geom_smooth(method = "loess") +
+    scale_x_date(name = "Date", date_breaks = "6 months", date_labels = "%m-%Y") +
+    scale_y_continuous(name = "Mean Ratings")
 
-
+print(Plot_unscented)
 
 
 
@@ -102,14 +109,29 @@ Distinguish scented versus unscented candles using color, shape, and line type (
 
 ```{r combine datasets, eval=FALSE}
 candles_full <- bind_rows(
-	scented = candeles_scented, 
-	unscented = candeles_unscented, 
+	Scented = candeles_scented, 
+	Unscented = candeles_unscented, 
 	.id = "Scented"
 )
+
 ```
 
 ```{r}
+candles_full %>% 
+  filter(Date > "2017-01-01") %>%
+  group_by(Date, Scented) %>%
+  mutate(Mean_rating = mean(Rating, na.rm = TRUE))
+  filter(Date > as.Date("2017-01-01")) %>% 
+  ggplot() +
+    aes(x = as.Date(Date), y = Mean_rating) +
+    geom_point(size = 0.5, shape = 1, alpha = 0.03) +
+    geom_vline(xintercept = as.numeric(as.Date("2020-01-20")), linetype = "dashed") +
+    geom_smooth(method = "loess") +
+    scale_x_date(name = "Date", date_breaks = "6 months", date_labels = "%m-%Y") +
+    scale_y_continuous(name = "Mean Ratings")
 
+    
+    
 ```
 
 Which of these two sets of plots do you find easier to interpret?
