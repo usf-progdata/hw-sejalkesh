@@ -31,10 +31,17 @@ Each dataset contains the following information for the Top 3 selling scented or
 library(dplyr)
 library(tidyverse)
 library(ggplot2)
+library(readxl)
 
 ```
 
+```{r}
 
+Scented <- read_excel(here::here("HW05/Scented_all.xlsx"))
+Unscented <- read_excel(here::here("HW05/Unscented_all.xlsx"))
+
+
+```
 ## Part 1: Average daily ratings for scented and unscented candles
 
 For each category of candle (scented versus unscented), for all days from **2017-01-01** onward, create a plot showing:
@@ -61,6 +68,29 @@ Interpret these graphs.
 What do they show about scented candles over the time period?
 
 ```{r}
+Plot_scent <- Scented %>% 
+  filter(Date > "2017-01-01") %>% 
+  mutate(Mean_rating = mean(Rating, na.rm = TRUE)) %>% 
+  ggplot() + 
+    aes(x = as.Date(Date), y = Mean_rating) +
+    geom_point(size = 0.5, shape = 1, alpha = 0.03) +
+    geom_vline(xintercept = as.numeric(as.Date("2020-01-20")), linetype = "dashed") +
+    geom_smooth(method = "loess") +
+    scale_x_date(name = "Date", date_breaks = "6 months", date_labels = "%m-%Y") +
+    scale_y_continuous(name = "Mean Ratings")
+  
+  
+
+```
+
+```{r}
+Plot_unscented <- Scented %>% 
+  filter(Date > "2017-01-01") %>% 
+  
+
+
+
+
 
 ```
 
