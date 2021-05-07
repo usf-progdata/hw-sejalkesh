@@ -29,12 +29,43 @@ print(weather_data)
 
 ```
 
+
+This dataframe includes the average as well as actual temperatures and precipitation levels in the United States from 2014 to 2015. 
+
+This plot is to show how the average maximum temperatures compare to the average minimum temperatures. 
+
 ```{r}
 
 df <- select(weather_data, date, average_min_temp, average_max_temp)
 ggplot(df, aes(as.Date(date), y = value, color = variable)) + 
     geom_point(aes(y = average_max_temp, col = "Average Maximum Temperatures")) + 
     geom_point(aes(y = average_min_temp, col = "Average Minimum Temperatures"))
+
+
+```
+
+Here we compare the actual minimum and the actual maximum temperatures in the united states from the years 2014 to 2015. 
+```{r}
+df <- select(weather_data, date, actual_max_temp, actual_min_temp)
+  ggplot(df, aes(as.Date(date), y = value, color = variable)) +
+    geom_point(aes(y = actual_max_temp, col = "Actual Maximum Temperatures")) +
+    geom_point(aes(y = actual_min_temp, col = "Actual Minimum Temperatures"))
+
+
+```
+
+
+
+```{r}
+df <- select(weather_data, date, actual_precipitation, average_precipitation)
+  ggplot(df, aes(as.Date(date), y =value, color = variable)) +
+    geom_point(aes(y = actual_precipitation, col = "Actual Precipitation")) +
+    geom_point(aes(y = average_precipitation, col = "Average Precipitation")) 
+    
+    
+
+
+
 
 
 ```
