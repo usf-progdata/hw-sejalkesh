@@ -1,0 +1,39 @@
+---
+title: "final_project"
+author: "Sejal Keshvara"
+date: "05-02-2021"
+output: 
+  html_document: default
+  github_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+```
+
+```{r}
+url <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/us-weather-history/KCLT.csv"
+
+weather_data <- read_csv(url)
+
+print(weather_data)
+
+```
+
+```{r}
+Average_weather <- weather_data %>% 
+  select(date, average_min_temp, average_max_temp) 
+   ##ggplot(Average_weather, aes(x = date, y = average_min_temp, average_max_temp) + 
+      ##    geom_density(alpha = 0.5))
+      
+
+
+```
