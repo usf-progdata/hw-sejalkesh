@@ -16,6 +16,7 @@ library(tidyverse)
 library(readr)
 library(dplyr)
 library(ggplot2)
+library(scales)
 
 ```
 
@@ -29,11 +30,11 @@ print(weather_data)
 ```
 
 ```{r}
-Average_weather <- weather_data %>% 
-  select(date, average_min_temp, average_max_temp) 
-   ##ggplot(Average_weather, aes(x = date, y = average_min_temp, average_max_temp) + 
-      ##    geom_density(alpha = 0.5))
-      
+
+df <- select(weather_data, date, average_min_temp, average_max_temp)
+ggplot(df, aes(as.Date(date), y = value, color = variable)) + 
+    geom_point(aes(y = average_max_temp, col = "Average Maximum Temperatures")) + 
+    geom_point(aes(y = average_min_temp, col = "Average Minimum Temperatures"))
 
 
 ```
