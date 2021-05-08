@@ -1,0 +1,127 @@
+---
+title: "final_project"
+author: "Sejal Keshvara"
+date: "05-02-2021"
+output: 
+  github_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(scales)
+library(lubridate)
+
+```
+
+```{r}
+url <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/us-weather-history/KCLT.csv"
+
+weather_data <- read_csv(url)
+
+print(weather_data)
+
+```
+
+
+
+#This dataframe includes the average as well as actual temperatures and precipitation levels in the United States from 2014 to 2015. Since the dataframe is already cleaned out (there are no missing values or 0's), I moved on to plotting the data to help me answer some questions I had about the differences in temperature as well as precipitation levels. 
+
+
+
+
+
+
+
+
+#This plot is to show how the average maximum temperatures compare to the average minimum temperatures. 
+
+```{r}
+
+df <- select(weather_data, date, average_min_temp, average_max_temp)
+ggplot(df, aes(as.Date(date), y = value, color = variable)) + 
+    geom_point(aes(y = average_max_temp, col = "Average Maximum Temperatures")) + 
+    geom_point(aes(y = average_min_temp, col = "Average Minimum Temperatures"))
+
+
+```
+
+#Here we compare the actual minimum and the actual maximum temperatures in the united states from the years 2014 to 2015. 
+```{r}
+df <- select(weather_data, date, actual_max_temp, actual_min_temp)
+  ggplot(df, aes(as.Date(date), y = value, color = variable)) +
+    geom_point(aes(y = actual_max_temp, col = "Actual Maximum Temperatures")) +
+    geom_point(aes(y = actual_min_temp, col = "Actual Minimum Temperatures"))
+
+
+```
+
+# The scatter plot shows that the actual maximum and minimum temperatures are fairly separated except during the winter months where the highest temperatures are as cold as how some of the minimum temperatures get. 
+
+
+
+
+
+
+
+#The actual and average minmimum temperatures are compared on the scatter plot. I was interested in finding out how the temperatures from 2014-2105 compare to the average temperatures. 
+
+```{r}
+df <- select(weather_data, date, average_min_temp, actual_min_temp)
+  ggplot(df, aes(as.Date(date), y = "Temperature", color = "blue")) +
+    geom_point(aes(y = average_min_temp, col = "Average Minimum Temperatures")) +
+    geom_point(aes(y = actual_min_temp, col = "Actual Minimum Temperatures"))
+
+
+```
+# What I found from the scatter plot was that the temperatures have stayed fairly consistent with the average temperatures although it seems that during the summer months, the actual minimum temperatures stoop far below the the average during the winter months especially around the Feburary-March time period of 2015. 
+
+
+
+
+
+```{r}
+df <- select(weather_data, date, average_max_temp, actual_max_temp)
+  ggplot(df, aes(as.Date(date), y = "Temperature", color = "green")) +
+    geom_point(aes(y = average_max_temp, col = "Average Maximum Temperatures")) +
+    geom_point(aes(y = actual_max_temp, col = "Actual Maximum Temperatures"))
+
+
+```
+# With the actual maximum temperatures, it is a similar case as the minimum temperatures. However, there seems to be more lower actual temperatures compared to the average during the early spring months. 
+
+
+
+
+#Now I wanted to compare the actual and average precipitation within the years of 2014-2015. 
+
+```{r}
+df <- select(weather_data, date, actual_precipitation, average_precipitation)
+  ggplot(df, aes(as.Date(date), y =value, color = variable)) +
+    geom_point(aes(y = actual_precipitation, col = "Actual Precipitation")) +
+    geom_point(aes(y = average_precipitation, col = "Average Precipitation"))
+
+
+```
+
+
+#The values of record precipitation are grouped together based on the year they occured in. 
+
+```{r}
+df3 <- select(weather_data, date, record_precipitation)
+  df3 %>% 
+  mutate(date = as.Date(date)) %>% 
+  mutate(y = format(date, '%Y')) %>% 
+  group_by(y)
+
+```
+
+
+#What I would like to do in the future is to focus on a wider date range spanning decades to truly see the long term changes of average temperature in the United states. 
