@@ -17,6 +17,7 @@ library(readr)
 library(dplyr)
 library(ggplot2)
 library(scales)
+library(lubridate)
 
 ```
 
@@ -30,9 +31,19 @@ print(weather_data)
 ```
 
 
-This dataframe includes the average as well as actual temperatures and precipitation levels in the United States from 2014 to 2015. 
+#Since the dataframe is already cleaned out (there are no missing values or 0's) I moved on to grouping the data columns in a certain way. 
 
-This plot is to show how the average maximum temperatures compare to the average minimum temperatures. 
+```{r}
+
+
+
+
+
+```
+
+#This dataframe includes the average as well as actual temperatures and precipitation levels in the United States from 2014 to 2015. 
+
+#This plot is to show how the average maximum temperatures compare to the average minimum temperatures. 
 
 ```{r}
 
@@ -44,7 +55,7 @@ ggplot(df, aes(as.Date(date), y = value, color = variable)) +
 
 ```
 
-Here we compare the actual minimum and the actual maximum temperatures in the united states from the years 2014 to 2015. 
+#Here we compare the actual minimum and the actual maximum temperatures in the united states from the years 2014 to 2015. 
 ```{r}
 df <- select(weather_data, date, actual_max_temp, actual_min_temp)
   ggplot(df, aes(as.Date(date), y = value, color = variable)) +
@@ -54,18 +65,54 @@ df <- select(weather_data, date, actual_max_temp, actual_min_temp)
 
 ```
 
+#The actual and average minmimum temperatures are compared on the scatter plot. I was interested in finding out how the temperatures from 2014-2105 compare to the average temperatures. 
 
+```{r}
+df <- select(weather_data, date, average_min_temp, actual_min_temp)
+  ggplot(df, aes(as.Date(date), y = "Temperature", color = "blue")) +
+    geom_point(aes(y = average_min_temp, col = "Average Minimum Temperatures")) +
+    geom_point(aes(y = actual_min_temp, col = "Actual Minimum Temperatures"))
+
+
+```
+# What I found from the scatter plot was that the temperatures have stayed fairly consistent with the average temperatures although it seems that during the summer months, the actual minimum temperatures 
+
+
+
+
+
+```{r}
+df <- select(weather_data, date, average_max_temp, actual_max_temp)
+  ggplot(df, aes(as.Date(date), y = "Temperature", color = "green")) +
+    geom_point(aes(y = average_max_temp, col = "Average Maximum Temperatures")) +
+    geom_point(aes(y = actual_max_temp, col = "Actual Maximum Temperatures"))
+
+
+```
+
+
+
+
+
+#Now I wanted to compare the actual and average precipitation within the years of 2014-2015. 
 
 ```{r}
 df <- select(weather_data, date, actual_precipitation, average_precipitation)
   ggplot(df, aes(as.Date(date), y =value, color = variable)) +
     geom_point(aes(y = actual_precipitation, col = "Actual Precipitation")) +
-    geom_point(aes(y = average_precipitation, col = "Average Precipitation")) 
-    
-    
+    geom_point(aes(y = average_precipitation, col = "Average Precipitation"))
 
 
+```
 
 
+#The values are grouped together based on the year they occured in. 
+
+```{r}
+df3 <- select(weather_data, date, record_precipitation)
+  df3 %>% 
+  mutate(date = as.Date(date)) %>% 
+  mutate(y = format(date, '%Y')) %>% 
+  group_by(y)
 
 ```
