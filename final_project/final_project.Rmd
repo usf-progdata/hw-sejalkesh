@@ -31,17 +31,15 @@ print(weather_data)
 ```
 
 
-#Since the dataframe is already cleaned out (there are no missing values or 0's) I moved on to grouping the data columns in a certain way. 
 
-```{r}
-
+#This dataframe includes the average as well as actual temperatures and precipitation levels in the United States from 2014 to 2015. Since the dataframe is already cleaned out (there are no missing values or 0's), I moved on to plotting the data to help me answer some questions I had about the differences in temperature as well as precipitation levels. 
 
 
 
 
-```
 
-#This dataframe includes the average as well as actual temperatures and precipitation levels in the United States from 2014 to 2015. 
+
+
 
 #This plot is to show how the average maximum temperatures compare to the average minimum temperatures. 
 
@@ -65,6 +63,14 @@ df <- select(weather_data, date, actual_max_temp, actual_min_temp)
 
 ```
 
+# The scatter plot shows that the actual maximum and minimum temperatures are fairly separated except during the winter months where the highest temperatures are as cold as how some of the minimum temperatures get. 
+
+
+
+
+
+
+
 #The actual and average minmimum temperatures are compared on the scatter plot. I was interested in finding out how the temperatures from 2014-2105 compare to the average temperatures. 
 
 ```{r}
@@ -75,7 +81,7 @@ df <- select(weather_data, date, average_min_temp, actual_min_temp)
 
 
 ```
-# What I found from the scatter plot was that the temperatures have stayed fairly consistent with the average temperatures although it seems that during the summer months, the actual minimum temperatures 
+# What I found from the scatter plot was that the temperatures have stayed fairly consistent with the average temperatures although it seems that during the summer months, the actual minimum temperatures stoop far below the the average during the winter months especially around the Feburary-March time period of 2015. 
 
 
 
@@ -89,7 +95,7 @@ df <- select(weather_data, date, average_max_temp, actual_max_temp)
 
 
 ```
-
+# With the actual maximum temperatures, it is a similar case as the minimum temperatures. However, there seems to be more lower actual temperatures compared to the average during the early spring months. 
 
 
 
@@ -106,7 +112,7 @@ df <- select(weather_data, date, actual_precipitation, average_precipitation)
 ```
 
 
-#The values are grouped together based on the year they occured in. 
+#The values of record precipitation are grouped together based on the year they occured in. 
 
 ```{r}
 df3 <- select(weather_data, date, record_precipitation)
@@ -116,3 +122,6 @@ df3 <- select(weather_data, date, record_precipitation)
   group_by(y)
 
 ```
+
+
+#What I would like to do in the future is to focus on a wider date range spanning decades to truly see the long term changes of average temperature in the United states. 
